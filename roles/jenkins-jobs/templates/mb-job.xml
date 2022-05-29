@@ -31,7 +31,7 @@
           <apiUri>https://api.github.com</apiUri>
           <credentialsId>GitOrg</credentialsId>
           <repoOwner>Varalakshmi13</repoOwner>
-          <repository>frontend</repository>
+          <repository>{{item.repoName}}</repository>
           <repositoryUrl>https://github.com/Varalakshmi13/{{item.repoName}}</repositoryUrl>
           <traits>
             <org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait>
