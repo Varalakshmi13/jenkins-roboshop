@@ -10,7 +10,7 @@ pipeline {
           sh '''
             terrafile -f env-dev/Terrafile
             terraform init -backend-config=env-dev/dev-backend.tfvars
-            terraform destroy -var-file=env-dev/devs.tfvars -auto-approve
+            terraform destroy -var-file=env-dev/dev.tfvars -auto-approve
           '''
         }
       }
