@@ -9,7 +9,7 @@ pipeline {
           git branch: 'main', url: 'https://github.com/Varalakshmi13/terraform-databases.git'
           sh '''
             terrafile -f env-dev/Terrafile
-            terraform init -backend-config=env-dev/dev-backend.tfvars
+            terraform init -reconfigure -backend-config=env-dev/dev-backend.tfvars
             terraform destroy -var-file=env-dev/dev.tfvars -auto-approve
           '''
         }
