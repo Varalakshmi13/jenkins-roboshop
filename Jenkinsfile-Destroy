@@ -25,6 +25,7 @@ pipeline {
                     cd terraform-mutable
                     terrafile -f env-dev/Terrafile
                     terraform init -backend-config=env-dev/dev-backend.tfvars
+                    export TF_VAR_APP_VERSION=${APP_VERSION}
                     terraform destroy -var-file=env-dev/dev.tfvars -auto-approve
                   '''
                 }
