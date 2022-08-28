@@ -16,24 +16,18 @@ pipeline {
       }
     }
 
-
-    stage('CART') {
-              steps {
-                dir('CART') {
-                  git branch: 'main', url: 'https://github.com/Varalakshmi13/cart.git'
-                  sh '''
-                    cd terraform-mutable
-                    terrafile -f env-dev/Terrafile
-                    terraform init -backend-config=env-dev/dev-backend.tfvars
-                    export TF_VAR_APP_VERSION=${APP_VERSION}
-                    terraform destroy -var-file=env-dev/dev.tfvars -auto-approve
-                  '''
-                }
-              }
+    stage('ALB') {
+          steps {
+            dir('ALB') {
+              git branch: 'main', url: 'https://github.com/Varalakshmi13/terraform-loadbalancers.git'
+              sh '''
+                terrafile -f env-dev/Terrafile
+                terraform init -backend-config=env-dev/dev-backend.tfvars
+                terraform destroy -var-file=env-dev/dev.tfvars -auto-approve
+              '''
             }
-
-
-
+          }
+        }
 
   }
 }
