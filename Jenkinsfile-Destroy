@@ -3,6 +3,21 @@ pipeline {
 
   stages {
 
+
+    stage('cart') {
+              steps {
+                dir('cart') {
+                  git branch: 'main', url: 'https://github.com/Varalakshmi13/cart.git'
+                  sh '''
+                    cd terraform-mutable
+                    terrafile -f env-dev/Terrafile
+                    terraform init -backend-config=env-dev/dev-backend.tfvars
+                    terraform destroy -var-file=env-dev/dev.tfvars -auto-approve
+                  '''
+                }
+              }
+            }
+
     stage('DB') {
       steps {
         dir('DB') {
@@ -29,19 +44,6 @@ pipeline {
           }
         }
 
-    stage('cart') {
-              steps {
-                dir('cart') {
-                  git branch: 'main', url: 'https://github.com/Varalakshmi13/cart.git'
-                  sh '''
-                    cd terraform-mutable
-                    terrafile -f env-dev/Terrafile
-                    terraform init -backend-config=env-dev/dev-backend.tfvars
-                    terraform destroy -var-file=env-dev/dev.tfvars -auto-approve
-                  '''
-                }
-              }
-            }
 
   }
 }
